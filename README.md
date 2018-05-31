@@ -1,2 +1,1 @@
-# jbonatakis.github.io
-Personal website
+# README
