@@ -59,6 +59,10 @@ main > a:link {
     text-decoration: none;
 }
 
+main > a:hover {
+    text-decoration: none;
+}
+
 .icons-social i {
 	padding: 10px;
 }
