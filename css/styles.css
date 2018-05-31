@@ -59,7 +59,7 @@ main > a:link {
     text-decoration: none;
 }
 
-main > a:hover {
+main > a:visited {
     text-decoration: none;
 }
 
