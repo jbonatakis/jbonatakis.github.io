@@ -55,11 +55,11 @@ main > .tagline {
 	font-weight: 100;
 }
 
-main > a.tagline:link {
+main > .tagline:link {
     text-decoration: none;
 }
 
-main > a.tagline:visited {
+main > .tagline:visited {
     text-decoration: none;
 }
 
