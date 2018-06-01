@@ -55,12 +55,9 @@ main > .tagline {
 	font-weight: 100;
 }
 
-main > .tagline:link {
-    text-decoration: none;
-}
-
-main > .tagline:visited {
-    text-decoration: none;
+.tagline a  
+{
+    color: #FAFAFA;
 }
 
 .icons-social i {
