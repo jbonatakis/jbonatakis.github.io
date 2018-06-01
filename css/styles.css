@@ -60,6 +60,11 @@ main > .tagline {
     color: #FAFAFA;
 }
 
+.tagline a:hover
+{
+    font-weight: bold;
+}
+
 .icons-social i {
 	padding: 10px;
 }
