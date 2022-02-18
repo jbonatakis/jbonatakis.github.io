@@ -27,7 +27,7 @@
     ]
   },
   "resume": {
-    "skillmessage": "Here you can create a short write-up of your skills to show off to employers",
+    "skillmessage": "",
     "education": [
       {
         "school": "University of Colorado Boulder",
@@ -69,35 +69,16 @@
       }
     ],
     "skills": [
-      {
-        "name": "Git",
-        "level": "100%"
-      },
-      {
-        "name": "Python",
-        "level": "55%"
-      },
-      {
-        "name": "SQL",
-        "level": "50%"
-      },
-      {
-        "name": "AWS",
-        "level": "90%"
-      },
-      {
-        "name": "GCP",
-        "level": "80%"
-      }
+
     ]
   },
   "portfolio": {
     "projects": [
       {
-        "title": "Title",
-        "category": "Category",
-        "image": "canadian-wanderlust.jpg",
-        "url": "https://www.example.com"
+        "title": "News Desk",
+        "category": "",
+        "image": "news-desk.png",
+        "url": "http://www.jackbonatakis.com/news-desk/"
       }
     ]
   }
