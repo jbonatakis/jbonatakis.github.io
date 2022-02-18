@@ -1,0 +1,104 @@
+{
+  "main": {
+    "name": "Jack Bonatakis",
+    "occupation": "{Software | Data} Engineer",
+    "description": "",
+    "image": "profilepic.jpg",
+    "bio": "",
+    "contactmessage": "Here is where you should write your message to readers to have them get in contact with you.",
+    "email": "jackbonatakis@gmail.com",
+    "address": {
+      "city": "Reston",
+      "state": "Virginia"
+    },
+    "website": "http://www.jackbonatakis.com",
+    "resumedownload": "/resume.pdf",
+    "social": [
+      {
+        "name": "linkedin",
+        "url": "https://www.linkedin.com/in/jack-bonatakis/",
+        "className": "fa fa-linkedin"
+      },
+      {
+        "name": "github",
+        "url": "http://github.com/jbonatakis",
+        "className": "fa fa-github"
+      }
+    ]
+  },
+  "resume": {
+    "skillmessage": "Here you can create a short write-up of your skills to show off to employers",
+    "education": [
+      {
+        "school": "University of Colorado Boulder",
+        "degree": "Masters in Business Analytics",
+        "graduated": "May 2018",
+        "description": ""
+      },
+      {
+        "school": "The George Washington University",
+        "degree": "Bachelors in Archaeology",
+        "graduated": "May 2016",
+        "description": ""
+      }
+    ],
+    "work": [
+      {
+        "company": "Rhino",
+        "url": "https://www.sayrhino.com",
+        "title": "Manager, Data Engineering",
+        "years": "June 2021 - February 2022",
+        "location": "Remote",
+        "description": "I managed and served as tech lead for all data warehousing efforts at Rhino. I worked cross-functionally to coordinate closely with our Business Intelligence, Data Science, Risk, Finance, Product, and Engineering teams. Additionally I supported our data ingestion, data distribution, data ops, and analytics enablement teams as needed. Selected Tech Stack: Python, Airflow (GCP Cloud Composer), BigQuery, dbt, Docker, Stitch, Cloud Functions, Cloud Run, Cloud Build, Terraform"
+      },
+      {
+        "company": "The MITRE Corporation",
+        "url": "https://www.mitre.org",
+        "title": "Senior Data Engineer",
+        "years": "March 2020 - June 2021",
+        "location": "McLean, VA",
+        "description": "I built some cool software, written primarily in Python and deployed via Terraform in AWS (GovCloud). Lambda functions, ECS/Fargate, API Gateway, managing networking/IAM, Glue, Athena, DynamoDB, and more."
+      },
+      {
+        "company": "DAS42",
+        "url": "https://www.das42.com",
+        "title": "Associate Analytics Consultant",
+        "years": "July 2018 - March 2020",
+        "location": "Denver, CO",
+        "description": "Built data pipelines, models, and reports using Apache Airflow, GCP, AWS, Snowflake, BigQuery, Fivetran, Looker, Python, and more."
+      }
+    ],
+    "skills": [
+      {
+        "name": "Git",
+        "level": "100%"
+      },
+      {
+        "name": "Python",
+        "level": "55%"
+      },
+      {
+        "name": "SQL",
+        "level": "50%"
+      },
+      {
+        "name": "AWS",
+        "level": "90%"
+      },
+      {
+        "name": "GCP",
+        "level": "80%"
+      }
+    ]
+  },
+  "portfolio": {
+    "projects": [
+      {
+        "title": "Title",
+        "category": "Category",
+        "image": "canadian-wanderlust.jpg",
+        "url": "https://www.example.com"
+      }
+    ]
+  }
+}
