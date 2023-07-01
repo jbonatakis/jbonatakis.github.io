@@ -7,7 +7,6 @@ class Header extends Component {
       var name = this.props.data.name;
       var occupation= this.props.data.occupation;
       var description= this.props.data.description;
-      var state = this.props.data.address.state;
       var networks= this.props.data.social.map(function(network){
         return <li key={network.name}><a href={network.url}><i className={network.className}></i></a></li>
       })
@@ -26,7 +25,7 @@ class Header extends Component {
             <li><a className="smoothscroll" href="#about">About</a></li>
 	         <li><a className="smoothscroll" href="#resume">Resume</a></li>
             <li><a className="smoothscroll" href="#portfolio">Projects</a></li>
-            <li><a href="/writing">Writing</a></li>
+            <li><a href="https://xyz.jackbonatakis.com/">Writing</a></li>
          </ul>
 
       </nav>
