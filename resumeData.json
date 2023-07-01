@@ -6,9 +6,9 @@
     "image": "profilepic.jpg",
     "bio": "",
     "contactmessage": "Here is where you should write your message to readers to have them get in contact with you.",
-    "email": "jackbonatakis@gmail.com",
+    "email": "jackbonatakis at gmail dot com",
     "address": {
-      "city": "Reston",
+      "city": "Near D.C.",
       "state": "Virginia"
     },
     "website": "http://www.jackbonatakis.com",
@@ -44,6 +44,14 @@
     ],
     "work": [
       {
+        "company": "Robin",
+        "url": "https://www.robinpowered.com",
+        "title": "Principal Software Engineer, Data",
+        "years": "March 2022 - Present",
+        "location": "Remote",
+        "description": "Upgrading and expanding Robin's analytics platform"
+      },
+      {
         "company": "Rhino",
         "url": "https://www.sayrhino.com",
         "title": "Manager, Data Engineering",
@@ -69,11 +77,11 @@
       }
     ],
     "skills": [
-      {
-        "name": "Git",
-        "level": "100%"
-      }
-
+      "Python",
+      "SQL",
+      "Data warehousing",
+      "Clearly not front-end webdev",
+      "Cloud architecture"
     ]
   },
   "portfolio": {
