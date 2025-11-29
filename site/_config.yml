@@ -32,8 +32,21 @@ linkedin_displayname: /linkedin
 theme: minima
 minima:
   skin: auto
+  nav_pages:
+    - about.markdown
+    - cv.markdown
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-archives
+
+# Automatically generate category pages
+jekyll-archives:
+  enabled:
+    - categories
+  layout: category
+  permalinks:
+    category: '/:name/'
 
 # Syntax highlighting
 markdown: kramdown
