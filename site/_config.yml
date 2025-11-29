@@ -18,7 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Jack Bonatakis
+title: jack.bonatak.is
 # email: jack@bonatak.is
 description: >- # this means to ignore newlines until "baseurl:"
   Half-baked thoughts on whatever I feel like writing about
@@ -31,7 +31,7 @@ linkedin_displayname: /linkedin
 # Build settings
 theme: minima
 minima:
-  skin: solarized-dark
+  skin: auto
 plugins:
   - jekyll-feed
 
