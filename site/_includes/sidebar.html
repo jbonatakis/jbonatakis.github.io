@@ -19,18 +19,5 @@
     <p>No categories yet.</p>
     {% endif %}
   </div>
-
-  <!-- Optional: Recent Posts Section -->
-  <div class="sidebar-section">
-    <h3>Recent Posts</h3>
-    <ul class="recent-posts">
-      {% for post in site.posts limit:5 %}
-        <li>
-          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-          <span class="post-date">{{ post.date | date: "%b %d, %Y" }}</span>
-        </li>
-      {% endfor %}
-    </ul>
-  </div>
 </aside>
 
