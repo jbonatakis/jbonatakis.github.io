@@ -10,14 +10,14 @@ categories: notes
 - Most LLM providers have embeddings models/endpoints that can take input and return a vector
 - Vectors are represented as arrays of numbers (generally 32-bit floats)
 - They have a magnitude
-    - This is the length of the vector. Length is NOT the number of components in the vector -- that's dimension, and is usually fixed per-mode (512, 1536, etc)
+    - This is the length of the vector. Length is NOT the number of components in the vector -- that's dimension, and is usually fixed per-model (512, 1536, etc)
 - They also have a direction
     - This is the actual numerical encoding of the meaning of the input
 - Normalization of vectors results in removing the impact of magnitude on similarity
 - Regarding similarity, similarity of vectors can be calculated multiple ways
 - Two very common ways are *cosine similarity* and *inner product similarity* (aka Dot Product)
 - For normalized vectors, cosine and inner product similarity are the same. This is because normalization yields a denominator of 1 in the cosine calculation.
-    - The Numerator of the cosine similarity calculation *is* the inner product calculation
+    - The numerator of the cosine similarity calculation *is* the inner product calculation
 - Inner product calculation: A * B
     - A: `[2,3,4]`
     - B: `[5,4,3]`
