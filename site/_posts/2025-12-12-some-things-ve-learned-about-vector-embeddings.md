@@ -6,8 +6,6 @@ permalink: /:title/
 categories: notes
 ---
 
-# Some things I've Learned about vector embeddings
-
 - Text (or other content, like images, with the right model) can be *embedded* returning a vector
 - Most LLM providers have embeddings models/endpoints that can take input and return a vector
 - Vectors are represented as arrays of numbers (generally 32-bit floats)
@@ -21,16 +19,16 @@ categories: notes
 - For normalized vectors, cosine and inner product similarity are the same. This is because normalization yields a denominator of 1 in the cosine calculation.
     - The Numerator of the cosine similarity calculation *is* the inner product calculation
 - Inner product calculation: A * B
-    - A: [2,3,4]
-    - B: [5,4,3]
-    - Inner product: (2*5) + (3*4) + (4*3)
-- Cosine simlarity: A * B / ||A||*||B||
-    - Double bars (||) means the *length* or *norm* of a vector
+    - A: `[2,3,4]`
+    - B: `[5,4,3]`
+    - Inner product: `(2*5) + (3*4) + (4*3)`
+- Cosine simlarity: `A * B / ||A||*||B||`
+    - Double bars (`||`) means the *length* or *norm* of a vector
     - This is calculated by taking the square root of the sum of squares for the vector
-    - Eg. [2,3,4] = sqrt((2^2) + (3^2) + (4^2)) = sqrt(4+9+16) = sqrt(29)
+    - Eg. `[2,3,4] = sqrt((2^2) + (3^2) + (4^2)) = sqrt(4+9+16) = sqrt(29)`
 - To normalize a vector, divide every component by its length:
-    - Eg. [2,3,4] --> Length of sqrt(29) as seen above, so normalized:
-    - [(2/sqrt(29)), (3/sqrt(29)), (4/sqrt(29))] ~ [0.3714, 0.5571, 0.7428]
+    - Eg. `[2,3,4]` --> Length of sqrt(29) as seen above, so normalized:
+    - `[(2/sqrt(29)), (3/sqrt(29)), (4/sqrt(29))] ~ [0.3714, 0.5571, 0.7428]`
 - Most embedding methods return 32-bit floats
     - Eg. 0.01610957272350788
 - In a vector database, a vector can be *quantized*, and stored as 16 bit values by using a halfvec data type
