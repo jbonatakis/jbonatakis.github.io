@@ -28,7 +28,7 @@ of The Book into chunks perhaps based on section, header, etc. There are several
 And more. I think chunking is *critical* to any real RAG application, but I didn't want to get caught up on that here. I think it will be a good focus for later learning. 
 
 ### Storage
-Next is the database. As discussed above, this is standard Postgres with the `pgvector` extension enabled. Database migrations are managed via `dbmate`, a nice migration framework that
+Next is the database. This is standard Postgres with the `pgvector` extension enabled. Database migrations are managed via `dbmate`, a nice migration framework that
 enables and encourages the use of raw SQL instead of an ORM. I've created one table, `embeddings`, defined as:
 ```sql
 CREATE TABLE embeddings (
