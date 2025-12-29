@@ -2,6 +2,8 @@
 title: "I set out to learn Rust"
 author: Jack Bonatakis
 date: 2025-12-28
+permalink: /:title/
+categories: projects
 ---
 
 ...and I guess I got a little distracted, because instead I built a POC document ingestion and vector search app instead.
