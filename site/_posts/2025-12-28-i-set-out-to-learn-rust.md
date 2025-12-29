@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "I set out to learn Rust"
 author: Jack Bonatakis
 date: 2025-12-28
