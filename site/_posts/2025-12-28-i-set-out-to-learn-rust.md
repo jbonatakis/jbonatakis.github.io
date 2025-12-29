@@ -7,7 +7,7 @@ permalink: /:title/
 categories: projects
 ---
 
-...and I guess I got a little distracted, because instead I built a POC document ingestion and vector search app instead.
+...and I guess I got a little distracted, because I built a POC document ingestion and vector search app instead.
 
 ### Document Processing and Ingestion
 First is the document ingestion layer. In its current form this specifically downloads the markdown files that comprise [The Book](https://doc.rust-lang.org/book/),
