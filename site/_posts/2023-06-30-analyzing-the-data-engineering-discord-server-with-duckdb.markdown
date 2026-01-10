@@ -2,7 +2,7 @@
 layout: post
 title:  "Analyzing the Data Engineering Discord Server with DuckDB"
 date:   2023-06-30
-permalink: /:title/
+permalink: /blog/:title/
 categories: projects
 ---
 In case you didn't know, there's a fantastic Data Engineering community on Discord ([invite here](https://discord.gg/3ynsHAee7y)). I've been a member of this server since the very start, and I've seen it grow substantially over the years. If you read that last sentence again, you'll notice that it's *really vague*. When was the start? Was I *really* there at the start, or did I just join (waves hands) *a while ago*? How much has the server grown over time? How many members are there? How often does the average user post? What are the most popular channels? **I could go on**. 
