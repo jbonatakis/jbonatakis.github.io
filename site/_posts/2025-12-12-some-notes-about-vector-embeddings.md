@@ -2,7 +2,7 @@
 layout: post
 title:  "Some notes about vector embeddings"
 date:   2025-12-12
-permalink: /blog/:title/
+permalink: /blah/:title/
 categories: notes
 ---
 
