@@ -7,5 +7,5 @@ permalink: /links
 A running list of things I like and want to keep handy.
 
 ## Articles
-https://bvisness.me/high-level/
+[https://bvisness.me/high-level/](https://bvisness.me/high-level/)
 
