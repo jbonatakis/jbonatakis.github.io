@@ -464,4 +464,4 @@ In fact I haven't even taken time to read the code. *I still don't really know h
 
 ---
  
-So is this *vibe coding*? Maybe. Maybe it's vibe-coding++. Or maybe it's just some more tokens and another evening down the drain. Either way I had fun. That's good enough for me.
+So is this *vibe coding*? Maybe. Maybe it's vibe-coding++. Or maybe it's just some more tokens and another evening down the drain. Either way I had fun and learned a couple things. That's good enough for me.
