@@ -23,9 +23,9 @@ At the end of that process I usually have something usable. It's pretty manual t
 It's still very much in progress, but that has resulted in [blackbird](https://github.com/jbonatakis/blackbird). `blackbird` will take your project summary and generate a JSON plan for it, defining dependencies and keeping track of the status of each task. An example of an actual plan is below:
 
 <details>
-    <summary>Click to see plan</summary>
+<summary>Click to see plan</summary>
 
-```json
+{% highlight json %}
 {
   "schemaVersion": 1,
   "items": {
@@ -403,7 +403,7 @@ It's still very much in progress, but that has resulted in [blackbird](https://g
     }
   }
 }
-```
+{% endhighlight %}
 </details>
 
 You'll notice that this plan contains numerous steps, each listing its status, dependencies, parents, children, and other metadata. This is generated under the hood by passing the execution to Claude Code along with the JSON schema that we expect. I plan to eventually support Codex and other AI CLI tools as well.
