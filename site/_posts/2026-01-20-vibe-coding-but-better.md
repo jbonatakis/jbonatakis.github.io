@@ -6,9 +6,8 @@ date: 2026-01-20
 permalink: /blah/:title/
 categories: projects
 ---
-> [!NOTE]
 > TL;DR -- 
-> I built blackbird, a CLI tool to break your work down into manageable chunks that Claude Code or Codex can follow easily. Then I used that to build key-keeper, a browser extension to securely share API keys with websites.
+> I built [blackbird](https://github.com/jbonatakis/blackbird), a CLI tool to break your work down into manageable chunks that Claude Code or Codex can follow easily. Then I used that to build [key-keeper](https://github.com/jbonatakis/key-keeper), a browser extension to securely share API keys with websites.
 
 ---
 
