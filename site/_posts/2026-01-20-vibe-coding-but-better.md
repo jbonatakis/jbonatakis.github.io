@@ -409,7 +409,7 @@ It's still very much in progress, but that has resulted in [blackbird](https://g
 You'll notice that this plan contains numerous steps, each listing its status, dependencies, parents, children, and other metadata. This is generated under the hood by passing the execution to Claude Code along with the JSON schema that we expect. I plan to eventually support Codex and other AI CLI tools as well.
 
 Now we can use `blackbird` to see what to work on first by running `blackbird list`:
-![blackbird list screenshot](../assets/images/blackbird-list.png)
+![blackbird list screenshot](https://raw.githubusercontent.com/jbonatakis/jbonatakis.github.io/master/site/assets/images/blackbird-list.png)
 
 Each of these tasks are a root level task, don't depend on any other work, and unblock other work as they're completed. This filtering provides a natural ordering for how a project should be built. Eventually I'd like to also add in parallel execution. For now though this is all that `blackbird` does -- generate a plan. 
 
@@ -457,8 +457,8 @@ Build a MV3 WebExtension (Chrome + Firefox) that stores user-provided API keys p
 
 I gave Codex no instructions while it was building. [Here's the commit that represents the actual output from Codex](https://github.com/jbonatakis/key-keeper/commit/009ab676c651edf8c77d8bce2b160449279f3442). All I've done since (as of writing) is some cleanup and a build step. And here is `key-keeper` running in Firefox:
 
-![key-keeper options](../assets/images/key-keeper-options.png)
-![key-keeper test page](../assets/images/key-keeper-test-page.png)
+![key-keeper options](https://raw.githubusercontent.com/jbonatakis/jbonatakis.github.io/master/site/assets/images/key-keeper-options.png)
+![key-keeper test page](https://raw.githubusercontent.com/jbonatakis/jbonatakis.github.io/master/site/assets/images/key-keeper-test-page.png)
 
 In fact I haven't even taken time to read the code. *I still don't really know how to build a browser extension*. 
 
