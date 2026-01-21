@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Vibe coding but better"
-author: Jack Bonatakis
 date: 2026-01-20
 permalink: /blah/:title/
 categories: projects
