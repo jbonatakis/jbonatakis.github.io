@@ -417,11 +417,11 @@ However, if you pair it with Claude Code or Codex, it works surprisingly well. I
 
 ---
 
-I've had a lot of idea for web apps to build that had AI core to their function and for which I had no intention of charging users. I was never quite sure how to go about doing that though. Do I use *my* API key and incur all the cost for anyone who uses the site? That sounds like a great way for a Chinese bot to rack up a huge bill for me. No, that's out.
+I've had a lot of ideas for web apps to build that had AI core to their function and for which I had no intention of charging users. I was never quite sure how to go about doing that though. Do I use *my* API key and incur all the cost for anyone who uses the site? That sounds like a great way for a Chinese bot to rack up a huge bill for me. No, that's out.
 
 Do I go with a BYOK approach and ask users to trust me with the proper treatment of their keys? Even in an auditable open-source project I would personally not trust that, so that's out as well. 
 
-`key-keeper` is a browser extension that solves this problem. Instead of having an app request a key from a user directly, `key-keeper` stores the API key in extension storage that is inaccessible to any script running in the browser and allows users to set access policies on that key by origin and operation, as well as provide a TTL. Then instead of making requests directly to AI providers like OpenAI, an app can call the extension, which, if allowed by a policy, proxies the request using the saved key and returns the response to the app. 
+`key-keeper` is a browser extension that solves this problem. Instead of having an app request a key from a user directly, `key-keeper` stores the API key in extension storage that is inaccessible to any script running on a page and allows users to set access policies on that key by origin and operation, as well as provide a TTL. Then instead of making requests directly to AI providers like OpenAI, an app can call the extension, which, if allowed by a policy, proxies the request using the saved key and returns the response to the app. 
 
 Here's a sample request:
 
@@ -460,6 +460,8 @@ I gave Codex no instructions while it was building. [Here's the commit that repr
 
 ![key-keeper test page](https://raw.githubusercontent.com/jbonatakis/jbonatakis.github.io/master/site/assets/images/key-keeper-test-page.png)
 
-In fact I haven't even taken time to read the code. *I still don't really know how to build a browser extension*. 
+In fact I haven't even taken time to read the code. *I still don't really know how to build a browser extension*. I don't say that with pride in my ignorance, but rather awe at what these tools can do, especially if given some structured guidance.
 
-
+---
+ 
+So is this *vibe coding*? Maybe. Maybe it's vibe-coding++. Or maybe it's just some more tokens and another evening down the drain. Either way I had fun. That's good enough for me.
