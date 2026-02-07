@@ -92,7 +92,7 @@ But it has some benefits too. Recall above the compounding variance chart. Anoth
 
 This shows the variance increasing at an increasing rate as time, measured in tasks completed, goes on. But with a fresh session per task, we get:
 
-![Fresh context variance across tasks](/assets/svg/blackbird-variance.svg)
+![Fresh context variance across tasks](/assets/svg/blackbird-variance-pos-neg.svg)
 
 In this image you see that variance resets to 0 at the start of each new task. This is because all of the context from the previous session is discarded, and only relevant information about the task at hand is provided.
 
