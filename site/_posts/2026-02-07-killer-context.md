@@ -69,7 +69,7 @@ p<sub>t+1</sub> = p<sub>t</sub>⋅v
 
 Let's visualize this:
 
-![Cumulative variance across tasks](/assets/svg/blackbird-variance.svg)
+![Cumulative variance across tasks](/assets/svg/compound-variance.svg)
 > 
 > **insert collapsible table underneath**
 
