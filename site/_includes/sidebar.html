@@ -6,7 +6,7 @@
     <ul class="category-list">
       {% for category in categories %}
         {% assign category_name = category[0] %}
-        {% assign posts = category[1] %}
+        {% assign posts = category[1] | where_exp: "item", "item.unlisted != true" %}
         <li>
           <a href="{{ site.baseurl }}/{{ category_name | slugify }}/">
             {{ category_name | capitalize }}

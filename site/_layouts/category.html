@@ -6,8 +6,9 @@ layout: default
   <h1>{{ page.title | capitalize }}</h1>
   <p class="category-description">Posts in category: <strong>{{ page.title }}</strong></p>
 
+  {% assign listed_posts = page.posts | where_exp: "item", "item.unlisted != true" %}
   <ul class="post-list">
-    {% for post in page.posts %}
+    {% for post in listed_posts %}
     <li>
       <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
       <h2>
