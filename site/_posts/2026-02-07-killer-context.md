@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Killer Context: Closing the loop on spec-driven development"
+title: "Killer Context"
+subtitle: "Closing the loop on spec-driven development"
 date: 2026-02-07
 permalink: /blah/:title/
 categories: [thoughts, projects]
 unlisted: true
 ---
-# Killer Context
 
 > [!NOTE] 
 > This is a draft.
