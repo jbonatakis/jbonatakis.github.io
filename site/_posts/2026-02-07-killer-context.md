@@ -68,7 +68,8 @@ This is where we start to see what I call ***compound variance*** come into play
 p<sub>t+1</sub> = p<sub>t</sub>⋅v
 
 Let's visualize this:
-> **insert svg**
+
+![Cumulative variance across tasks](/assets/svg/blackbird-variance.svg)
 > 
 > **insert collapsible table underneath**
 
