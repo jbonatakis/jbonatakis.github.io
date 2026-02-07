@@ -78,14 +78,23 @@ After just 5 tasks with a compounding 10% variance, the outcome will have deviat
 
 ### Context as a liability
 
-Recent releases from some of the largest AI providers have [touted huge context windows](https://www.anthropic.com/news/claude-opus-4-6) as a benefit. The thinking goes that, ostensibly, a larger context window equals greater capability. [But is that really the case?](https://community.openai.com/t/large-context-window-what-are-you-using-it-for/1241320). From the anecdotes of other and my own experiences, often when the context grows too large then the quality of a model's output begins to decrease. This is acknowledged by the same AI providers who are releasing models with these massive context windows. This friction between feature availability and feature capacity has led to the rise of [context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) -- essentially designing systems that selectively manage what remains in an agent's context window over time, removing the unnecessary information to keep the agent on track. It's also why you see [entire sections in agent documentation about managing context](https://code.claude.com/docs/en/how-claude-code-works#the-context-window). But this process is imperfect, and Anthropic says it themselves right there:
+Recent releases from some of the largest AI providers have [touted huge context windows](https://www.anthropic.com/news/claude-opus-4-6) as a benefit. The thinking goes that, ostensibly, a larger context window equals greater capability. [But is that really the case](https://community.openai.com/t/large-context-window-what-are-you-using-it-for/1241320)? From the anecdotes of other and my own experiences, often when the context grows too large then the quality of a model's output begins to decrease. This is acknowledged by the same AI providers who are releasing models with these massive context windows. This friction between feature availability and feature capacity has led to the rise of [context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) -- essentially designing systems that selectively manage what remains in an agent's context window over time, removing the unnecessary information to keep the agent on track. It's also why you see [entire sections in agent documentation about managing context](https://code.claude.com/docs/en/how-claude-code-works#the-context-window). But this process is imperfect, and Anthropic says it themselves right there:
 
 > As you work, context fills up. Claude compacts automatically, but **instructions from early in the conversation can get lost**.
 
-Who is to say that the compaction process won't leave the agent lobotomized, with important information missing and irrelevant information retained, resulting in [poisoned context](https://docs.roocode.com/advanced-usage/context-poisoning)? Bringing it back to spec-driven development, if your context window is compacted midway through your task list, how confident are you that the quality of the context that remains will lead to optimal outputs? Personally, I'm skeptical of this. 
+Who is to say that the compaction process won't leave the agent lobotomized, with important information missing and irrelevant information retained, resulting in [poisoned context](https://docs.roocode.com/advanced-usage/context-poisoning)? Bringing it back to spec-driven development, if your context window is compacted midway through your task list (or several times), how confident are you that the quality of the context that remains will lead to optimal outputs? Personally, I'm skeptical of this.  Because of this, my typical workflow has included starting a fresh agent session for each task. There are tradeoffs with this approach versus one long session, mainly:
+* It's slower because at the start of each session that agent has no context on your codebase and so must use its tools to search and hydrate it with relevant information
+* It's more token hungry because the above rehydration process has to happen for each new task
 
+But it has some benefits too. Recall above the compounding variance chart. Another way to visualize that could be like so:
 
-* Relying on large context windows to execute multiple tasks is actually a net negative
+![Cumulative variance across tasks](/assets/svg/compound-variance-pos-neg.svg)
+
+This shows the variance increasing at an increasing rate as time, measured in tasks completed, goes on. But with a fresh session per task, we get:
+
+![Fresh context variance across tasks](/assets/svg/blackbird-variance.svg)
+
+In this image you see that variance resets to 0 at the start of each new task. This is because all of the context from the previous session is discarded, and only relevant information about the task at hand is provided.
 
 * Instead eschew relying on massive context windows. Throw out your context for each task. Treat agents as stateless.
 
