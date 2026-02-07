@@ -37,21 +37,21 @@ This brings us back to `/opsx:apply`. When you run that and let your agent execu
 
 *v* = per-task retained accuracy (for “10% variance”, this is *v*=0.9)
 
-*p<sub>t</sub>* = cumulative correctness after task *t* (normalized so perfect execution = 1.0)
+*p<sub><sub>t</sub></sub>* = cumulative correctness after task *t* (normalized so perfect execution = 1.0)
 
-*p<sub>0</sub>* = 1.0 = perfect starting state
+*p<sub><sub>0</sub></sub>* = 1.0 = perfect starting state
 
 So after one task:
 
-*p<sub>1</sub>* ​= *p<sub>0</sub>*​⋅*v* = 1.0⋅0.9 = 0.9
+*p<sub><sub>1</sub></sub>* ​= *p<sub><sub>0</sub></sub>*​⋅*v* = 1.0⋅0.9 = 0.9
 
 After the second task:
 
-*p<sub>2</sub>*​ = *p<sub>1</sub>*​⋅*v* = 0.9⋅0.9 = 0.81
+*p<sub><sub>2</sub></sub>*​ = *p<sub><sub>1</sub></sub>*​⋅*v* = 0.9⋅0.9 = 0.81
 
 This is where we start to see what I call ***compound variance*** come into play. The formula generalizes for *t* tasks as:
 
-p<sub>t+1</sub> = p<sub>t</sub>⋅v
+p<sub><sub>t+1</sub></sub> = p<sub><sub>t</sub></sub>⋅v
 
 Let's visualize this:
 
@@ -82,4 +82,4 @@ This shows the variance increasing at an increasing rate as time, measured in ta
 In this image you see that variance resets to 0 at the start of each new task. This is because all of the context from the previous session is discarded and only relevant information about the task at hand is provided at startup. *Essentially this treats agents as stateless*. 
 
 ### Garbage in, garbage out
-All of this is well and good, but it sits on top of one massive assumption: *the plan is an accurate representation of your desired end state*. In other words, it assumes that you've written a good spec and divided that spec up into accurate, detailed tasks that together describe the entire unit of work that you're aiming to for. 
+All of this is well and good, but it sits on top of one massive assumption: *the plan is an accurate representation of your desired end state*. In other words, it assumes that you've written a good spec and divided that spec up into accurate, detailed tasks that together describe the entire unit of work that you're aiming to build. 
