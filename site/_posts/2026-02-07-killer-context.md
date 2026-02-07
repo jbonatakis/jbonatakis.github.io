@@ -12,7 +12,7 @@ unlisted: true
 > This is a draft.
 
 > [!NOTE] 
-> This post (like all of my posts) is written by a human.
+> This post (like all of my posts) was written by a human.
 
 ___
 
@@ -20,24 +20,10 @@ ___
 
 ___
 
-Thoughts
-- Stateless agents
-- Existing agentic coding assistants are really good and only going to get better, but we need to solve for context
-- Blackbird composes together agent sessions with a fresh context
-- It's a tradeoff:
-	- Guarantee of no poisoned or bloated context
-	- Agent is slower because it needs to do all of the startup tasks and rehydrate relevant information
-
 Assumptions
-- LLMs/coding agents are imperfect
-- In a long running process with multiple tasks, this imperfection compounds
-- Bad context "poisons" future outcomes
 - The plan, if executed perfectly, will result in a perfect outcome
 	- This assume that the plan is perfect. If you, the developer, leave the creation of the plan entirely to the agent, you're baking in n% inaccuracy from the start
 		- This compounds with the n% inaccuracy from each step in the plan! n=10% so from a perfect (100%) plan, after one step you're at 90%. But if the plan is only 90% perfect, after one step you're at 81%. 
-
-
-Draft
 
 ### The rise of spec-driven development
 In my circles, [spec driven development](https://news.ycombinator.com/item?id=45935763) is all the rage. It seems that tools like [OpenSpec](https://github.com/Fission-AI/OpenSpec) and [spec-kit](https://github.com/github/spec-kit) are brought up in nearly every other conversation. I am largely on board. If building with coding agents, I think that clearly defining what you want up front is absolutely necessary. ~~In fact, I think it's a great practice even if not building with an agent.~~ My main issue with it, however, is that most spec driven tools stop short. They define the spec, but they offload the execution of that spec to an agent like Claude Code or Codex. 
@@ -77,12 +63,11 @@ Let's visualize this:
 After just 5 tasks with a compounding 10% variance, the outcome will have deviated from a perfect execution by over 40%. By the time you hit 10 tasks the outcome will have deviated from perfect by over 65%. You might be thinking that 10% variance per task is too high, but even if we reduce that to just 3% variance, after 10 tasks the deviation from perfect is ~27%. By the 15th task the deviation is ~37%.
 
 ### Context as a liability
-
 Recent releases from some of the largest AI providers have [touted huge context windows](https://www.anthropic.com/news/claude-opus-4-6) as a benefit. The thinking goes that, ostensibly, a larger context window equals greater capability. [But is that really the case](https://community.openai.com/t/large-context-window-what-are-you-using-it-for/1241320)? From the anecdotes of other and my own experiences, often when the context grows too large then the quality of a model's output begins to decrease. This is acknowledged by the same AI providers who are releasing models with these massive context windows. This friction between feature availability and feature capacity has led to the rise of [context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) -- essentially designing systems that selectively manage what remains in an agent's context window over time, removing the unnecessary information to keep the agent on track. It's also why you see [entire sections in agent documentation about managing context](https://code.claude.com/docs/en/how-claude-code-works#the-context-window). But this process is imperfect, and Anthropic says it themselves right there:
 
 > As you work, context fills up. Claude compacts automatically, but **instructions from early in the conversation can get lost**.
 
-Who is to say that the compaction process won't leave the agent lobotomized, with important information missing and irrelevant information retained, resulting in [poisoned context](https://docs.roocode.com/advanced-usage/context-poisoning)? Bringing it back to spec-driven development, if your context window is compacted midway through your task list (or several times), how confident are you that the quality of the context that remains will lead to optimal outputs? Personally, I'm skeptical of this.  Because of this, my typical workflow has included starting a fresh agent session for each task. There are tradeoffs with this approach versus one long session, mainly:
+Who is to say that the compaction process won't leave the agent lobotomized, with important information missing and irrelevant information retained, resulting in [poisoned context](https://docs.roocode.com/advanced-usage/context-poisoning)? Bringing it back to spec-driven development, if your context window is compacted midway through your task list (or several times), how confident are you that the quality of the context that remains will lead to optimal outputs? Personally, I'm skeptical of this.  Because of this, my typical workflow has included starting a fresh agent session for each task, providing it only high level project information, the details on the new overarching goal of the feature, and the specific task information. There are tradeoffs with this approach versus one long session, mainly:
 * It's slower because at the start of each session that agent has no context on your codebase and so must use its tools to search and hydrate it with relevant information
 * It's more token hungry because the above rehydration process has to happen for each new task
 
@@ -94,8 +79,7 @@ This shows the variance increasing at an increasing rate as time, measured in ta
 
 ![Fresh context variance across tasks](/assets/svg/blackbird-variance-pos-neg.svg)
 
-In this image you see that variance resets to 0 at the start of each new task. This is because all of the context from the previous session is discarded, and only relevant information about the task at hand is provided.
+In this image you see that variance resets to 0 at the start of each new task. This is because all of the context from the previous session is discarded and only relevant information about the task at hand is provided at startup. *Essentially this treats agents as stateless*. 
 
-* Instead eschew relying on massive context windows. Throw out your context for each task. Treat agents as stateless.
-
-So what is there to do? Well, one idea is to think of each task as a discrete unit of work deserving of its own context. We start a fresh session of our chosen agent for each task, feeding it whatever context it needs up front to get started. 
+### Garbage in, garbage out
+All of this is well and good, but it sits on top of one massive assumption: *the plan is an accurate representation of your desired end state*. In other words, it assumes that you've written a good spec and divided that spec up into accurate, detailed tasks that together describe the entire unit of work that you're aiming to for. 
