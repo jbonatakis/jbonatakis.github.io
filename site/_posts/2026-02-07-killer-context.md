@@ -142,7 +142,7 @@ Blackbird has some other features to push users towards measured, reviewed chang
 All of these are configurable, so if you did want to just *let it rip* you can do that too. Because each task has its own context window, blackbird can just keep chugging through tasks for as long as your token allotment allows.
 
 ### Comedy of errors
-It has been over three years since the initial public release of ChatGPT. There has been massive change in in the field of software engineering, and there are no signs of that slowing down any time soon. Coding agents like Claude Code or OpenAI's Codex are here, and they are *good*. But they're not perfect, and the more you use them the more likely you are to recognize some issues:
+It has been over three years since the initial public release of ChatGPT. There has been massive change in the field of software engineering, and there are no signs of that slowing down any time soon. Coding agents like Claude Code or OpenAI's Codex are here, and they are *good*. But they're not perfect, and the more you use them the more likely you are to recognize some issues:
 * There's almost always some variance between what the user *intends* for the agent to build, and what it actually builds
 * If allowed, that variance will compound
 * Eventually context windows fill, and the imperfect compaction processes employed by these agents cement any of that earlier variance as ground truth in the compacted subset of the context window
