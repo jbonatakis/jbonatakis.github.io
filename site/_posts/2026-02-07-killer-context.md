@@ -146,7 +146,7 @@ It has been over three years since the initial public release of ChatGPT. There 
 * There's almost always some variance between what the user *intends* for the agent to build, and what it actually builds
 * If allowed, that variance will compound
 * Eventually context windows fill, and the imperfect compaction processes employed by these agents cement any of that earlier variance as ground truth in the compacted subset of the context window
-* As a context window compounds, its free space is diminished, increasing the rate at which further compaction and degradation occur
+* As a context window compacts, its remaining free space is diminished, increasing the rate at which further compaction and degradation occur
 
 When it comes to spec-driven development, these downsides are all at play. However, by taking a few pragmatic steps we can circumvent most of them:
 * Ensure that your specs are detailed and accurate to your intention as the developer. Don't let the AI have free reign over this process
