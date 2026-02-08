@@ -2,12 +2,12 @@
 layout: post
 title: "Killer Context"
 subtitle: "Closing the loop on spec-driven development"
-date: 2026-02-07
+date: 2026-02-08
 permalink: /blah/:title/
 categories: [thoughts, projects]
 unlisted: true
 ---
-> TL;DR: I theorize that coding agent errors compound over time leading to increasingly worse outcomes as a session continues. I built Blackbird based on this theory, which restarts each task in a plan with a fresh context window, with a new task's instructions as its starting point. This minimizes *deviation from intention* leading to better outcomes.
+> TL;DR: I theorize that coding agent errors compound over time leading to increasingly worse outcomes as a session continues. I built [Blackbird](https://github.com/jbonatakis/blackbird) based on this theory, which restarts each task in a plan with a fresh context window, with a new task's instructions as its starting point. This minimizes *deviation from intention* leading to better outcomes.
 
 ___
 
@@ -122,15 +122,35 @@ p<sub><sub>t</sub></sub> = q ⋅ v<sup><sup>t</sup></sup>
 
 In other words, accuracy decays exponentially across tasks, while plan quality acts as a hard ceiling on the best possible outcome. That's a pretty intuitive statement actually -- write a bad plan, get a bad result. So how do we avoid this negative outcome? The answer is by ruthlessly editing the spec and task list, working to get `q` as close to 1 as possible. The problem is that it's *so* easy to just accept a generated spec and a generated task list. In fact, OpenSpec even has a command for it: [/opsx:ff](https://github.com/Fission-AI/OpenSpec/blob/main/docs/commands.md#opsxff). This is used in the [very first example](https://github.com/Fission-AI/OpenSpec/tree/main?tab=readme-ov-file#see-it-in-action) they show you when you go through their documentation, conditioning new users to accept their auto-generated artifacts. I would urge you to instead avoid these types of commands. Sure, use OpenSpec or similar tools to help in creating the initial spec and the subsequent task list, but make sure you're reviewing everything closely and making required edits as you go so that you're minimizing the variance from your intent at the very start.
 
-### Comedy of errors
-Conclusion/summary
-
-Many things can go wrong
-* Per-task variance
-* Compounding variance
-* Lossy compactions
-* Increasing frequency of compactions
-
-We can circumvent all of these except for per-task variance at the cost of a little extra time and a few extra tokens by treating agents as stateless task executors. But by avoiding the others, we're at the same time limiting the per-task variance.
-
 ### Enter Blackbird
+While this post is my first time formalizing these thoughts with words, I've had this intuition for some time. It has led me to begin building my own harness for spec-driven development: [Blackbird](https://github.com/jbonatakis/blackbird). The core idea behind blackbird is to keep the agent "on track" as it works through a list of tasks generated from a spec. It does that by implementing exactly the flow outlined above: for each task in a  given task list, a new non-interactive/headless session of your selected agent is started. A new session is given:
+* A high level project overview
+* Task specific information (goal, acceptance criteria, etc.)
+* A default system prompt
+
+Crucially we are *not* compacting the context from the session that implemented the previous task. If the agent determines that it needs any context on the work done in the previous session then it will use its default tools to search through the codebase and grab exactly what it needs. Blackbird will work through the generated (and hopefully reviewed!) plan one task at a time in *dependency order*, marking tasks done and unblocking downstream tasks as it goes. 
+
+![Subset of a blackbird plan](/assets/images/blackbird-plan.png)
+
+As of writing, the blackbird codebase is over 15,000 SLoC of Go, excluding tests (and almost 30,000 with tests). Aside from the initial build in which I followed the general flow described in this post manually, blackbird was entirely bootstrapped, meaning every new feature added was constructed through a spec, a plan built off of that spec, and letting blackbird execute from that plan. Depending on who you are that will either turn you off from this project or serve as some level of validation of the pattern. Regardless, I'd love for you to give it a try and let me know your thoughts, good or bad.
+
+Blackbird has some other features to push users towards measured, reviewed changes:
+* Granularity control during plan creation, so that you can push the plan generator to create smaller, easier to specify changes
+* The ability to review changes after each task is completed. You can accept, reject, or request changes
+* Coming soon: the ability to have automated code reviews as chunks of the plan are completed
+
+All of these are configurable, so if you did want to just *let it rip* you can do that too. Because each task has its own context window, blackbird can just keep chugging through tasks for as long as your token allotment allows.
+
+### Comedy of errors
+It has been over three years since the initial public release of ChatGPT. There has been massive change in in the field of software engineering, and there are no signs of that slowing down any time soon. Coding agents like Claude Code or OpenAI's Codex are here, and they are *good*. But they're not perfect, and the more you use them the more likely you are to recognize some issues:
+* There's almost always some variance between what the user *intends* for the agent to build, and what it actually builds
+* If allowed, that variance will compound
+* Eventually context windows fill, and the imperfect compaction processes employed by these agents cement any of that earlier variance as ground truth in the compacted subset of the context window
+* As a context window compounds, its free space diminished, increasing the rate at which further compounds and further degradation occur
+
+When it comes to spec-driven development, these downsides are all at play. However, by taking a few pragmatic steps we circumvent most of them:
+* Ensure that your specs are detailed and accurate to your intention as the developer. Don't let the AI have free reign over this process
+* Ensure that any downstream artifact, such as a task list, is also closely inspected and edited as needed to match your intent
+* Treat context as a liability, feeding the agent just what information it needs to do its job without confusing it or allowing the context of previous work turn sour
+
+I think by doing the above, you'll find that you can take your spec-driven development to the next level.
