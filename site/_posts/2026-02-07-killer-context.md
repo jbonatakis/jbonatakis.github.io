@@ -82,4 +82,21 @@ This shows the variance increasing at an increasing rate as time, measured in ta
 In this image you see that variance resets to 0 at the start of each new task. This is because all of the context from the previous session is discarded and only relevant information about the task at hand is provided at startup. *Essentially this treats agents as stateless*. 
 
 ### Garbage in, garbage out
-All of this is well and good, but it sits on top of one massive assumption: *the plan is an accurate representation of your desired end state*. In other words, it assumes that you've written a good spec and divided that spec up into accurate, detailed tasks that together describe the entire unit of work that you're aiming to build. 
+All of this is well and good, but it sits on top of one massive assumption: *the plan is an accurate representation of your desired end state*. In other words, it assumes that you've written a good spec and divided that spec up into accurate, detailed tasks that together describe the entire unit of work that you're aiming to build. But what happens if you haven't done that? Well, let's recall our earlier equation for compound variance:
+
+p<sub><sub>t+1</sub></sub> = p<sub><sub>t</sub></sub>⋅v
+
+If we change this up slightly to let `q` equal plan quality, where `q` is between 1-0, and let `n` equal the number of tasks, we can see the impact of the plan quality with the following formula:
+
+p<sub><sub>n</sub></sub> = q ⋅ v<sup><sup>n</sup></sup>
+
+In other words, execution variance compounds exponentially across tasks, while plan quality acts as a hard ceiling on the best possible outcome. That's a pretty intuitive statement actually -- write a bad plan, get a bad result. 
+
+What's the conclusion to draw here?
+* OpenSpec has the agent generate the spec
+* Variance applies to spec generation too.
+* OpenSpec pushes you to let the agent generate the spec.
+* It's easy not to edit it once the spec is generated.
+* Then an AI generated set of tasks based off of the spec -- even more room for variance. And this is the `q` in the above equation. 
+* Conclusions? You *need* to closely revise and edit the spec, as well as the generated plan (blackbird will generate the plan for you from a JSON schema, but it's still susceptible to the same variance). Work to get `q` as close to 1 as possible.
+
