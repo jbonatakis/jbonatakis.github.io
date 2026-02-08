@@ -82,7 +82,7 @@ This shows the variance increasing at an increasing rate as time, measured in ta
 
 ![Fresh context variance across tasks](/assets/svg/blackbird-variance-pos-neg.svg)
 
-In this image you see that variance resets to 0 at the start of each new task. This is because all of the context from the previous session is discarded and only relevant information about the task at hand is provided at startup. *Essentially this treats agents as stateless*. 
+In this image you see that variance resets to 0 at the start of each new task. This is because all of the context from the previous session is discarded and only relevant information about the task at hand is provided at startup. *Essentially this treats agents as stateless*. By doing this we avoid entirely the  [vicious cycle](https://en.wikipedia.org/wiki/Vicious_circle) of repeated compactions.
 
 ### Garbage in, garbage out
 All of this is well and good, but it sits on top of one massive assumption: *the plan is an accurate representation of your desired end state*. In other words, it assumes that you've written a good spec and divided that spec up into accurate, detailed tasks that together describe the entire unit of work that you're aiming to build. But what happens if you haven't done that? Well, let's recall our earlier equation for compound variance:
