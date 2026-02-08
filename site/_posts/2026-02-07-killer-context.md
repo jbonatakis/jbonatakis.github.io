@@ -102,3 +102,14 @@ What's the conclusion to draw here?
 * It's easy not to edit it once the spec is generated.
 * Then an AI generated set of tasks based off of the spec -- even more room for variance. And this is the `q` in the above equation. 
 * Conclusions? You *need* to closely revise and edit the spec, as well as the generated plan (blackbird will generate the plan for you from a JSON schema, but it's still susceptible to the same variance). Work to get `q` as close to 1 as possible.
+
+### Comedy of errors
+Conclusion/summary
+
+Many things can go wrong
+* Per-task variance
+* Compounding variance
+* Lossy compactions
+* Increasing frequency of compactions
+
+We can circumvent all of these except for per-task variance at the cost of a little extra time and a few extra tokens by treating agents as stateless task executors. But by avoiding the others, we're at the same time limiting the per-task variance.
