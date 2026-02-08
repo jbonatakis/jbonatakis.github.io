@@ -45,11 +45,24 @@ p<sub><sub>t+1</sub></sub> = p<sub><sub>t</sub></sub>⋅v
 Let's visualize this:
 
 ![Cumulative variance across tasks](/assets/svg/compound-variance.svg)
-> 
-> **insert collapsible table underneath**
 
+<details markdown="1">
+<summary>Cumulative accuracy (p<sub>t</sub>) by task count</summary>
 
-After just 5 tasks with a compounding 10% variance, the outcome will have deviated from a perfect execution by over 40%. By the time you hit 10 tasks the outcome will have deviated from perfect by over 65%. You might be thinking that 10% variance per task is too high, but even if we reduce that to just 3% variance, after 10 tasks the deviation from perfect is ~27%. By the 15th task the deviation is ~37%.
+| Tasks | *p*<sub>t</sub> (v=0.90, 10% variance) | Deviation | *p*<sub>t</sub> (v=0.97, 3% variance) | Deviation |
+| :---: | :------------------------------------: | :-------: | :-----------------------------------: | :-------: |
+|   0   |                  1.00                  |    0%     |                 1.00                  |    0%     |
+|   1   |                  0.90                  |    10%    |                 0.97                  |    3%     |
+|   2   |                  0.81                  |    19%    |                 0.94                  |    6%     |
+|   3   |                  0.73                  |    27%    |                 0.91                  |    9%     |
+|   4   |                  0.66                  |    34%    |                 0.89                  |    11%    |
+|   5   |                  0.59                  |    41%    |                 0.86                  |    14%    |
+|  10   |                  0.35                  |    65%    |                 0.74                  |    26%    |
+|  15   |                  0.21                  |    79%    |                 0.63                  |    37%    |
+
+</details>
+
+After just 5 tasks with a compounding 10% variance, the outcome will have deviated from a perfect execution by over 40%. By the time you hit 10 tasks the outcome will have deviated from perfect by over 65%. You might be thinking that 10% variance per task is too high, but even if we reduce that to just 3% variance, after 10 tasks the deviation from perfect is ~26%. By the 15th task the deviation is ~37%.
 
 ### Context as a liability
 Recent releases from some of the largest AI providers have [touted huge context windows](https://www.anthropic.com/news/claude-opus-4-6) as a benefit. The thinking goes that, ostensibly, a larger context window equals greater capability. [But is that really the case](https://community.openai.com/t/large-context-window-what-are-you-using-it-for/1241320)? From the anecdotes of other and my own experiences, often when the context grows too large then the quality of a model's output begins to decrease. This is acknowledged by the same AI providers who are releasing models with these massive context windows. This friction between feature availability and feature capability has led to the rise of [context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) -- essentially designing systems that selectively manage what remains in an agent's context window over time, removing the unnecessary information to keep the agent on track. It's also why you see [entire sections in agent documentation about managing context](https://code.claude.com/docs/en/how-claude-code-works#the-context-window). But this process is imperfect, and Anthropic says it themselves right there:
