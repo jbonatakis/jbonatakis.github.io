@@ -47,7 +47,7 @@ Let's visualize this:
 ![Cumulative variance across tasks](/assets/svg/compound-variance.svg)
 
 <details markdown="1">
-<summary>Cumulative accuracy (p<sub>t</sub>) by task count</summary>
+<summary>Cumulative accuracy (p<sub>t</sub>) by task count (click to expand)</summary>
 
 | Tasks | *p*<sub>t</sub> (v=0.90, 10% variance) | Deviation | *p*<sub>t</sub> (v=0.97, 3% variance) | Deviation |
 | :---: | :------------------------------------: | :-------: | :-----------------------------------: | :-------: |
