@@ -91,6 +91,20 @@ But, in addition to avoiding the building of a lossy contextual bedrock, it has 
 
 ![Cumulative variance across tasks](/assets/svg/compound-variance-pos-neg.svg)
 
+<details markdown="1">
+<summary>Deviation by task (1 − 0.9<sup>t</sup>, v=0.9)</summary>
+
+| Task  | Deviation (±) | % from plan |
+| :---: | :-----------: | :---------: |
+|   0   |     0.00      |     0%      |
+|   1   |     0.10      |     10%     |
+|   2   |     0.19      |     19%     |
+|   3   |     0.27      |     27%     |
+|   4   |     0.34      |     34%     |
+|   5   |     0.41      |    ~41%     |
+
+</details>
+
 This shows the variance increasing at an increasing rate as time, measured in tasks completed, goes on. But with a fresh session per task, we get:
 
 ![Fresh context variance across tasks](/assets/svg/blackbird-variance-pos-neg.svg)
