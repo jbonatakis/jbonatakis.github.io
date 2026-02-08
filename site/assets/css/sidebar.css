@@ -13,7 +13,8 @@
 
 .post-toc {
   position: fixed;
-  left: 2.5rem;
+  /* Center TOC in the left margin (between viewport edge and post content). Assumes content max-width ~800px. */
+  left: max(2.5rem, calc((100vw - 800px) / 4 - 100px));
   top: 6rem;
   width: 200px;
   max-height: calc(100vh - 8rem);
