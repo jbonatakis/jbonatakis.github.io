@@ -100,5 +100,8 @@ What's the conclusion to draw here?
 * Then an AI generated set of tasks based off of the spec -- even more room for variance. And this is the `q` in the above equation. 
 * Conclusions? You *need* to closely revise and edit the spec, as well as the generated plan (blackbird will generate the plan for you from a JSON schema, but it's still susceptible to the same variance). Work to get `q` as close to 1 as possible.
 
-* ALSO: even with compaction, executing a task list in a single session penalizes longer task lists developed off of my detailed specs. Ex: Let's assume compaction reduces context size by 80%. If it compacts when it hits 100%, we drop to 20%. Assuming that alread-compacted context a) remains indefinitely and b) can't be re-compacted, then we've removed 20% of our context window. When we again hit 100% and compact away 80%, we're compacting 80% of 80% = 64%, leaving the total compacted context remaining at 36%. And so on, leaving less and less context space for each additoonal task and each future compaction.
+* ALSO: even with compaction, executing a task list in a single session penalizes longer task lists developed off of more detailed specs. Ex: Let's assume compaction reduces context size by 80%. If it compacts when it hits 100%, we drop to 20%. Assuming that already-compacted context a) remains indefinitely and b) can't be re-compacted, then we've removed 20% of our context window. When we again hit 100% and compact away 80%, we're compacting 80% of 80% = 64%, leaving the total compacted context remaining at 36%. And so on, leaving less and less context space for each additoonal task and each future compaction.
+
+C<sub><sub>k</sub></sub> = 1 − (1 − r)<sup><sup>k</sup></sup>
+
 ![Compaction penalty](/assets/svg/compaction-ratio.svg)
