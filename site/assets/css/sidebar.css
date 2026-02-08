@@ -52,20 +52,45 @@
 }
 
 .post-toc a {
+  display: block;
   text-decoration: none;
   color: var(--minima-text-color, #333);
   transition: color 0.2s ease;
+  padding: 0.1rem 0;
 }
 
 .post-toc a:hover {
   color: var(--minima-brand-color, #2a7ae2);
 }
 
-.post-toc .post-toc-ul-2 { padding-left: 0.75rem; }
-.post-toc .post-toc-ul-3 { padding-left: 1.25rem; }
-.post-toc .post-toc-ul-4 { padding-left: 1.75rem; }
-.post-toc .post-toc-ul-5 { padding-left: 2.25rem; }
-.post-toc .post-toc-ul-6 { padding-left: 2.75rem; }
+.post-toc a.is-active {
+  font-weight: 600;
+  color: var(--minima-brand-color, #2a7ae2);
+  border-left: 2px solid var(--minima-brand-color, #2a7ae2);
+  padding-left: 0.5rem;
+  margin-left: -2px;
+  border-radius: 0 2px 2px 0;
+}
+
+.post-toc .post-toc-ul-2 {
+  padding-left: 0.75rem;
+}
+
+.post-toc .post-toc-ul-3 {
+  padding-left: 1.25rem;
+}
+
+.post-toc .post-toc-ul-4 {
+  padding-left: 1.75rem;
+}
+
+.post-toc .post-toc-ul-5 {
+  padding-left: 2.25rem;
+}
+
+.post-toc .post-toc-ul-6 {
+  padding-left: 2.75rem;
+}
 
 @media screen and (max-width: 900px) {
   .post-toc {

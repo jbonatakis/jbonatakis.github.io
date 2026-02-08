@@ -49,10 +49,42 @@
     var a = document.createElement('a');
     a.href = '#' + id;
     a.textContent = h.textContent;
+    a.setAttribute('data-toc-id', id);
     li.appendChild(a);
     stack[stack.length - 1].el.appendChild(li);
     previousLevel = level;
   }
 
   toc.appendChild(root);
+
+  function setActiveId(activeId) {
+    var links = toc.querySelectorAll('a[data-toc-id]');
+    for (var j = 0; j < links.length; j++) {
+      links[j].classList.toggle('is-active', links[j].getAttribute('data-toc-id') === activeId);
+    }
+  }
+
+  function updateActiveFromScroll() {
+    var topOffset = 120;
+    var viewportHeight = window.innerHeight;
+    var activeId = null;
+    var lastVisibleId = null;
+    for (var i = 0; i < headings.length; i++) {
+      var rect = headings[i].getBoundingClientRect();
+      if (rect.top <= topOffset) {
+        activeId = headings[i].id;
+      }
+      if (rect.top < viewportHeight && rect.bottom > 0) {
+        lastVisibleId = headings[i].id;
+      }
+    }
+    if (!activeId) activeId = lastVisibleId;
+    if (!activeId && headings.length > 0) activeId = headings[0].id;
+    setActiveId(activeId);
+  }
+
+  window.addEventListener('scroll', function () {
+    window.requestAnimationFrame(updateActiveFromScroll);
+  }, { passive: true });
+  updateActiveFromScroll();
 })();
