@@ -5,7 +5,7 @@ subtitle: "Closing the loop on spec-driven development"
 date: 2026-02-08
 permalink: /blah/:title/
 categories: [thoughts, projects]
-unlisted: true
+unlisted: false
 ---
 > TL;DR: I theorize that coding agent errors compound over time leading to increasingly worse outcomes as a session continues. I built [Blackbird](https://github.com/jbonatakis/blackbird) based on this theory, which restarts each task in a plan with a fresh context window, with a new task's instructions as its starting point. This minimizes *deviation from intention* leading to better outcomes.
 
@@ -95,13 +95,13 @@ But, in addition to avoiding the building of a lossy contextual bedrock, it has 
 <summary>Deviation by task (1 − 0.9<sup>t</sup>, v=0.9)</summary>
 
 | Task  | Deviation (±) | Accuracy (%) |
-| :---: | :-----------: | :-----------: |
-|   0   |     0.00      | 100 |
-|   1   |     0.10      | 90 |
-|   2   |     0.19      | 81 |
-|   3   |     0.27      | 73 |
-|   4   |     0.34      | 66 |
-|   5   |     0.41      | 59 |
+| :---: | :-----------: | :----------: |
+|   0   |     0.00      |     100      |
+|   1   |     0.10      |      90      |
+|   2   |     0.19      |      81      |
+|   3   |     0.27      |      73      |
+|   4   |     0.34      |      66      |
+|   5   |     0.41      |      59      |
 
 </details>
 
