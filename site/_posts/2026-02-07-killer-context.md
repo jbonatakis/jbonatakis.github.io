@@ -7,23 +7,12 @@ permalink: /blah/:title/
 categories: [thoughts, projects]
 unlisted: true
 ---
-
-> [!NOTE] 
-> This is a draft.
-
-> [!NOTE] 
-> This post (like all of my posts) was written by a human.
+> TL;DR: I theorize that coding agent errors compound over time leading to increasingly worse outcomes as a session continues. I built Blackbird based on this theory, which restarts each task in a plan with a fresh context window, with a new task's instructions as its starting point. This minimizes *deviation from intention* leading to better outcomes.
 
 ___
 
-> TL;DR: coding agent errors compound over time leading to increasingly worse outcomes as a session continues. Blackbird restarts each task in a plan with a fresh context window, with a new task's instructions as its starting point. This minimizes *deviation from intention* leading to better outcomes.
-
-___
-
-Assumptions
-- The plan, if executed perfectly, will result in a perfect outcome
-	- This assume that the plan is perfect. If you, the developer, leave the creation of the plan entirely to the agent, you're baking in n% inaccuracy from the start
-		- This compounds with the n% inaccuracy from each step in the plan! n=10% so from a perfect (100%) plan, after one step you're at 90%. But if the plan is only 90% perfect, after one step you're at 81%. 
+> [!NOTE] 
+> This post (like all of my posts) was written by a human. 
 
 ### The rise of spec-driven development
 In my circles, [spec driven development](https://news.ycombinator.com/item?id=45935763) is all the rage. It seems that tools like [OpenSpec](https://github.com/Fission-AI/OpenSpec) and [spec-kit](https://github.com/github/spec-kit) are brought up in nearly every other conversation. I am largely on board. If building with coding agents, I think that clearly defining what you want up front is absolutely necessary. ~~In fact, I think it's a great practice even if not building with an agent.~~ My main issue with it, however, is that most spec driven tools stop short. They define the spec, but they offload the execution of that spec to an agent like Claude Code or Codex. 
@@ -63,15 +52,29 @@ Let's visualize this:
 After just 5 tasks with a compounding 10% variance, the outcome will have deviated from a perfect execution by over 40%. By the time you hit 10 tasks the outcome will have deviated from perfect by over 65%. You might be thinking that 10% variance per task is too high, but even if we reduce that to just 3% variance, after 10 tasks the deviation from perfect is ~27%. By the 15th task the deviation is ~37%.
 
 ### Context as a liability
-Recent releases from some of the largest AI providers have [touted huge context windows](https://www.anthropic.com/news/claude-opus-4-6) as a benefit. The thinking goes that, ostensibly, a larger context window equals greater capability. [But is that really the case](https://community.openai.com/t/large-context-window-what-are-you-using-it-for/1241320)? From the anecdotes of other and my own experiences, often when the context grows too large then the quality of a model's output begins to decrease. This is acknowledged by the same AI providers who are releasing models with these massive context windows. This friction between feature availability and feature capacity has led to the rise of [context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) -- essentially designing systems that selectively manage what remains in an agent's context window over time, removing the unnecessary information to keep the agent on track. It's also why you see [entire sections in agent documentation about managing context](https://code.claude.com/docs/en/how-claude-code-works#the-context-window). But this process is imperfect, and Anthropic says it themselves right there:
+Recent releases from some of the largest AI providers have [touted huge context windows](https://www.anthropic.com/news/claude-opus-4-6) as a benefit. The thinking goes that, ostensibly, a larger context window equals greater capability. [But is that really the case](https://community.openai.com/t/large-context-window-what-are-you-using-it-for/1241320)? From the anecdotes of other and my own experiences, often when the context grows too large then the quality of a model's output begins to decrease. This is acknowledged by the same AI providers who are releasing models with these massive context windows. This friction between feature availability and feature capability has led to the rise of [context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) -- essentially designing systems that selectively manage what remains in an agent's context window over time, removing the unnecessary information to keep the agent on track. It's also why you see [entire sections in agent documentation about managing context](https://code.claude.com/docs/en/how-claude-code-works#the-context-window). But this process is imperfect, and Anthropic says it themselves right there:
 
 > As you work, context fills up. Claude compacts automatically, but **instructions from early in the conversation can get lost**.
 
-Who is to say that the compaction process won't leave the agent lobotomized, with important information missing and irrelevant information retained, resulting in [poisoned context](https://docs.roocode.com/advanced-usage/context-poisoning)? Bringing it back to spec-driven development, if your context window is compacted midway through your task list (or several times), how confident are you that the quality of the context that remains will lead to optimal outputs? Personally, I'm skeptical of this.  Because of this, my typical workflow has included starting a fresh agent session for each task, providing it only high level project information, the details on the new overarching goal of the feature, and the specific task information. There are tradeoffs with this approach versus one long session, mainly:
-* It's slower because at the start of each session that agent has no context on your codebase and so must use its tools to search and hydrate it with relevant information
+And [Cursor as well](https://cursor.com/blog/agent-best-practices#managing-context):
+
+> Long conversations can cause the agent to lose focus. After many turns and summarizations, the context accumulates noise and the agent can get distracted or switch to unrelated tasks. If you notice the effectiveness of the agent decreasing, it's time to start a new conversation.
+
+Who is to say that the compaction process won't leave the agent lobotomized, with important information missing and irrelevant information retained, resulting in [poisoned context](https://docs.roocode.com/advanced-usage/context-poisoning)? Bringing it back to spec-driven development, if your context window is compacted midway through your task list (or several times), how confident are you that the quality of the context that remains will lead to optimal outputs? Personally, I'm skeptical of this.   In fact, I believe that compaction will ultimately contribute further to the decline in quality of responses. Consider the chart below:
+
+![Compaction penalty](/assets/svg/compaction-ratio.svg)
+
+Assuming a consistent compaction ratio of 20% (and I acknowledge that this is a simplification), repeated compactions steadily reduce the amount of free space available in the context window. As free space shrinks, compactions necessarily occur more frequently.
+
+In a long-horizon, spec-driven execution, this is especially problematic. By the time execution of a task is underway, the active context already reflects an implementation that has begun  to diverge from original developer intent. Compaction of this context does not revisit or correct that divergence, but instead preserves a compressed snapshot of it.
+
+Subsequent compactions then add additional summaries derived from later stages of the implementation, each of which is itself based on earlier variance. Over time, the context becomes a stack of lossy summaries with no remaining access to the original intent. The result of this is not just information loss, but authority drift: the agent increasingly treats this accumulated history of approximations as ground truth. 
+
+To avoid this negative feedback cycle, my typical workflow has historically included starting a fresh agent session for each task, providing it only high level project information, the details on the new overarching goal of the feature, and the specific task information. I have found that it generally yields strong results. However, there are tradeoffs with this approach versus one long session, mainly:
+* It's slower because at the start of each session the agent has no context on your codebase and so must use its tools to search and hydrate it with relevant information
 * It's more token hungry because the above rehydration process has to happen for each new task
 
-But it has some benefits too. Recall above the compounding variance chart. Another way to visualize that could be like so:
+But, in addition to avoiding the building of a lossy contextual bedrock, it has other benefits too. Recall above the compounding variance chart. Another way to visualize that could be like so:
 
 ![Cumulative variance across tasks](/assets/svg/compound-variance-pos-neg.svg)
 
@@ -86,9 +89,9 @@ All of this is well and good, but it sits on top of one massive assumption: *the
 
 p<sub><sub>t+1</sub></sub> = p<sub><sub>t</sub></sub>⋅v
 
-If we change this up slightly to let `q` equal plan quality, where `q` is between 1-0, and let `n` equal the number of tasks, we can see the impact of the plan quality with the following formula:
+If we change this up slightly to let `q` equal plan quality, where `q` is between 1-0, and let `t` continue to equal the number of tasks, we can see the impact of the plan quality with the following formula:
 
-p<sub><sub>n</sub></sub> = q ⋅ v<sup><sup>n</sup></sup>
+p<sub><sub>t</sub></sub> = q ⋅ v<sup><sup>t</sup></sup>
 
 In other words, execution variance compounds exponentially across tasks, while plan quality acts as a hard ceiling on the best possible outcome. That's a pretty intuitive statement actually -- write a bad plan, get a bad result. 
 
@@ -99,9 +102,3 @@ What's the conclusion to draw here?
 * It's easy not to edit it once the spec is generated.
 * Then an AI generated set of tasks based off of the spec -- even more room for variance. And this is the `q` in the above equation. 
 * Conclusions? You *need* to closely revise and edit the spec, as well as the generated plan (blackbird will generate the plan for you from a JSON schema, but it's still susceptible to the same variance). Work to get `q` as close to 1 as possible.
-
-* ALSO: even with compaction, executing a task list in a single session penalizes longer task lists developed off of more detailed specs. Ex: Let's assume compaction reduces context size by 80%. If it compacts when it hits 100%, we drop to 20%. Assuming that already-compacted context a) remains indefinitely and b) can't be re-compacted, then we've removed 20% of our context window. When we again hit 100% and compact away 80%, we're compacting 80% of 80% = 64%, leaving the total compacted context remaining at 36%. And so on, leaving less and less context space for each additoonal task and each future compaction.
-
-C<sub><sub>k</sub></sub> = 1 − (1 − r)<sup><sup>k</sup></sup>
-
-![Compaction penalty](/assets/svg/compaction-ratio.svg)
