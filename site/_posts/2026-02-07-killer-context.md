@@ -94,25 +94,25 @@ But, in addition to avoiding the building of a lossy contextual bedrock, it has 
 <details markdown="1">
 <summary>Deviation by task (1 − 0.9<sup>t</sup>, v=0.9)</summary>
 
-| Task  | Deviation (±) | % from plan |
-| :---: | :-----------: | :---------: |
-|   0   |     0.00      |     0%      |
-|   1   |     0.10      |     10%     |
-|   2   |     0.19      |     19%     |
-|   3   |     0.27      |     27%     |
-|   4   |     0.34      |     34%     |
-|   5   |     0.41      |    ~41%     |
+| Task  | Deviation (±) | Accuracy (%) |
+| :---: | :-----------: | :-----------: |
+|   0   |     0.00      | 100 |
+|   1   |     0.10      | 90 |
+|   2   |     0.19      | 81 |
+|   3   |     0.27      | 73 |
+|   4   |     0.34      | 66 |
+|   5   |     0.41      | 59 |
 
 </details>
 
-This shows the variance increasing at an increasing rate as time, measured in tasks completed, goes on. But with a fresh session per task, we get:
+This shows the exponential decay in accuracy as time, measured in tasks completed, goes on. But with a fresh session per task, we get:
 
 ![Fresh context variance across tasks](/assets/svg/blackbird-variance-pos-neg.svg)
 
 In this image you see that variance resets to 0 at the start of each new task. This is because all of the context from the previous session is discarded and only relevant information about the task at hand is provided at startup. *Essentially this treats agents as stateless*. By doing this we avoid entirely the  [vicious cycle](https://en.wikipedia.org/wiki/Vicious_circle) of repeated compactions.
 
 ### Garbage in, garbage out
-All of this is well and good, but it sits on top of one massive assumption: *the plan is an accurate representation of your desired end state*. In other words, it assumes that you've written a good spec and divided that spec up into accurate, detailed tasks that together describe the entire unit of work that you're aiming to build. But what happens if you haven't done that? Well, let's recall our earlier equation for compound variance:
+All of this is well and good, but it sits on top of one massive assumption: *the plan is an accurate representation of the developer's desired end state*. In other words, it assumes that you've written a good spec and divided that spec up into accurate, detailed tasks that together describe the entire unit of work that you're aiming to build. But what happens if you haven't done that? Well, let's recall our earlier equation for compound variance:
 
 p<sub><sub>t+1</sub></sub> = p<sub><sub>t</sub></sub>⋅v
 
