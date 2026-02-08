@@ -3,7 +3,7 @@
   var content = document.querySelector('.post-content');
   if (!toc || !content) return;
 
-  var headings = content.querySelectorAll('h2, h3, h4');
+  var headings = content.querySelectorAll('h2, h3, h4, h5, h6');
   if (headings.length === 0) {
     toc.classList.add('post-toc--empty');
     return;
@@ -33,7 +33,7 @@
     var id = h.id || slugify(h.textContent);
     if (!h.id) h.id = id;
 
-    while (stack.length > 1 && stack[stack.length - 1].level >= level) {
+    while (stack.length > 1 && stack[stack.length - 1].level > level) {
       stack.pop();
     }
     var parent = stack[stack.length - 1].el;
