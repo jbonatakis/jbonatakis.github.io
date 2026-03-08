@@ -4,7 +4,7 @@ title: "Fixing Postgres table bloat with pg_repack"
 date: 2026-03-07
 permalink: /blah/:title/
 categories: experiments
-unlisted: true
+unlisted: false
 ---
 
 ## Crash Course: Postgres data storage topology
