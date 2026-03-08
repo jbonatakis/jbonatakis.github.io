@@ -11,3 +11,6 @@ A running list of things I like and want to keep handy.
 
 [The part of PostgreSQL we hate the most](https://www.cs.cmu.edu/~pavlo/blog/2023/04/the-part-of-postgresql-we-hate-the-most.html)
 
+## Tools
+[Why upgrade?](https://why-upgrade.depesz.com/)
+
