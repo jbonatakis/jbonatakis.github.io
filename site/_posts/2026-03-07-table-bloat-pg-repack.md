@@ -56,12 +56,12 @@ There are really two options. First, you can run a `VACUUM FULL`. This does all 
 
 An alternative to `VACUUM FULL` is to use the application `pg_repack`. `pg_repack` achieves the same end as `VACUUM FULL`, but does so in an online manner, thus allowing other operations to execute against the table. This is what we'll explore below.
 
-# Experiment
+## Experiment
 To demonstrate everything discussed above, I wrote some code that spins up a Postgres database with autovacuum disabled, generates bloat via inserting, updating, and deleting data, and then runs some queries against the database in its bloated state, in its vacuumed state, and in its state post-pg_repack. 
 
 The repository with the source code to reproduce all of this for yourself can be found here: [https://github.com/jbonatakis/bloat-lab-pg-repack](https://github.com/jbonatakis/bloat-lab-pg-repack)
 
-## Setup
+### Setup
 Starting with a completely fresh system, let's create some bloat. First, insert 3M rows, update half of them 6 times, then delete 97% of them.
 
 ```bash
@@ -167,7 +167,7 @@ This point lookup by id used a Bitmap Index Scan + Bitmap Heap Scan rather than 
 
 At this point let's vacuum, re-run, and see what changes.
 
-## Vacuum
+### Vacuum
 ```sql
 VACUUM ANALYZE lab.bloat_test;
 ```
@@ -247,7 +247,7 @@ This query once again got a Sequential Scan, and once again finished in the 8 se
 ```
 Finally, our point lookup. Once again a Bitmap Index Scan. It's still around the same execution time, completing in under 1.79 ms. I think we can get this faster.
 
-## Repack
+### Repack
 Now let's run pg_repack, rewriting the table data to free up space and reduce the number of pages, then check our results again.
 
 ```bash
