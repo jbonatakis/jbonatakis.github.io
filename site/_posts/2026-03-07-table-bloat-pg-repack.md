@@ -52,7 +52,7 @@ Luckily, re-enabling or tuning autovacuum, or running a manual vacuum, will quic
 
 So what, then, do you do about this?
 
-There are really two options. First, you can run a `VACUUM FULL`. This does all of the same things as a normal `VACUUM` operation, but it will also reclaim the unused disk space from any empty or sparsely populated pages by rewriting the files on disk with only the live tuples from the existing pages. Think of it like defragging a HDD. The downside of `VACUUM FULL` is that it requires an `ACCESS EXCLUSIVE` lock on the table for the duration of the operation. That means no other process can update, delete, or even read from the table. This is clearly not a good option for production environments.
+There are really two options. First, you can run a `VACUUM FULL`. This does all of the same things as a normal `VACUUM` operation, but it will also reclaim the unused disk space from any empty or sparsely populated pages by rewriting the files on disk with only the live tuples from the existing pages. Think of it like defragging a HDD. The downside of `VACUUM FULL` is that it requires an `ACCESS EXCLUSIVE` lock on the table for the duration of the operation. That means no other process can update, delete, or even read from the table. This would be a disruptive action to take in production environments.
 
 An alternative to `VACUUM FULL` is to use the application `pg_repack`. `pg_repack` achieves the same end as `VACUUM FULL`, but does so in an online manner, thus allowing other operations to execute against the table. This is what we'll explore below.
 
@@ -124,7 +124,7 @@ Now let's run some queries and get a baseline.
 | Execution Time: 26435.947 ms                                                                                                                   |
 +------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
-The query took ~26s to proess ~90k rows. The bitmap index scan had to process ~4.5M index matches and the heap scan touched a huge number of blocks, indicating severe bloat.
+The query took ~26s to process ~90k rows. The bitmap index scan had to process ~4.5M index matches and the heap scan touched a huge number of blocks, indicating severe bloat.
 
 ```bash
 > explain (analyze, buffers) select count(marker) from lab.bloat_test;
@@ -248,7 +248,7 @@ This query once again got a Sequential Scan, and once again finished in the 8 se
 Finally, our point lookup. Once again a Bitmap Index Scan. It's still around the same execution time, completing in under 1.79 ms. I think we can get this faster.
 
 ## Repack
-Now let's run pg_repack, getting rewriting the table data to free up space and reduce the number of pages, then check our results again.
+Now let's run pg_repack, rewriting the table data to free up space and reduce the number of pages, then check our results again.
 
 ```bash
 >> time ./scripts/pg_repack.sh --dbname=repack_lab --table=lab.bloat_test
